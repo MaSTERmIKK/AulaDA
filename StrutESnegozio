@@ -1,0 +1,63 @@
+# Definizione dell'inventario
+inventario = {
+    'penna': {'prezzo': 1.50, 'quantità': 100},
+    'quaderno': {'prezzo': 2.50, 'quantità': 50},
+    'zaino': {'prezzo': 25.00, 'quantità': 20}
+}
+
+# Registro delle vendite per tenere traccia delle transazioni
+registro_vendite = []
+
+# Funzioni per la gestione del negozio
+
+def visualizza_inventario():
+    for articolo, dettagli in inventario.items():
+        print(f"Articolo: {articolo}, Prezzo: {dettagli['prezzo']}€, Quantità: {dettagli['quantità']}")
+
+def aggiungi_al_inventario(articolo, prezzo, quantità):
+    if articolo in inventario:
+        inventario[articolo]['quantità'] += quantità
+    else:
+        inventario[articolo] = {'prezzo': prezzo, 'quantità': quantità}
+    print(f"Aggiunto: {articolo}, Prezzo: {prezzo}€, Quantità: {quantità}")
+
+def rimuovi_dal_inventario(articolo, quantità):
+    if articolo in inventario and inventario[articolo]['quantità'] >= quantità:
+        inventario[articolo]['quantità'] -= quantità
+        if inventario[articolo]['quantità'] == 0:
+            del inventario[articolo]
+        print(f"Rimosso: {articolo}, Quantità: {quantità}")
+    else:
+        print(f"Errore: Articolo non disponibile o quantità richiesta non valida.")
+
+def acquista_articolo(articolo, quantità):
+    if articolo in inventario and inventario[articolo]['quantità'] >= quantità:
+        costo_totale = inventario[articolo]['prezzo'] * quantità
+        inventario[articolo]['quantità'] -= quantità
+        registro_vendite.append((articolo, quantità, costo_totale))
+        print(f"Acquistato: {articolo}, Quantità: {quantità}, Costo Totale: {costo_totale}€")
+    else:
+        print(f"Errore: Articolo non disponibile o quantità richiesta non valida.")
+
+def rapporto_vendite():
+    guadagno_totale = 0
+    print("Rapporto delle vendite:")
+    for articolo, quantità, costo in registro_vendite:
+        print(f"Articolo: {articolo}, Quantità: {quantità}, Incasso: {costo}€")
+        guadagno_totale += costo
+    print(f"Guadagno totale: {guadagno_totale}€")
+
+# Test delle funzioni
+# Questi sono solo esempi di come le funzioni possono essere utilizzate
+
+# Visualizzazione dell'inventario iniziale
+visualizza_inventario()
+
+# Aggiunta di un nuovo articolo all'inventario
+aggiungi_al_inventario('matita', 0.50, 100)
+
+# Acquisto di alcuni articoli
+acquista_articolo('penna', 10)
+
+# Visualizzazione del rapporto delle vendite
+rapporto_vendite()
