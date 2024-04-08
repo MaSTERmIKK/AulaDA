@@ -1,0 +1,37 @@
+class Ristorante:
+    def __init__(self, nome, tipo_cucina):
+        self.nome = nome
+        self.tipo_cucina = tipo_cucina
+        self.aperto = False  # Di default, il ristorante è chiuso
+
+    def descrivi_ristorante(self):
+        """Stampa una descrizione del ristorante."""
+        print(f"{self.nome} offre un'ottima cucina {self.tipo_cucina}.")
+
+    def stato_apertura(self):
+        """Controlla se il ristorante è aperto o chiuso."""
+        if self.aperto:
+            print(f"{self.nome} è attualmente aperto.")
+        else:
+            print(f"{self.nome} è attualmente chiuso.")
+
+    def apri_ristorante(self):
+        """Apre il ristorante."""
+        self.aperto = True
+        print(f"{self.nome} ora è aperto.")
+
+    def chiudi_ristorante(self):
+        """Chiude il ristorante."""
+        self.aperto = False
+        print(f"{self.nome} ora è chiuso.")
+
+# Creazione di un'istanza della classe Ristorante
+ristorante = Ristorante("Da Mario", "italiana")
+
+# Uso dei metodi definiti
+ristorante.descrivi_ristorante()
+ristorante.stato_apertura()
+ristorante.apri_ristorante()
+ristorante.stato_apertura()
+ristorante.chiudi_ristorante()
+ristorante.stato_apertura()
